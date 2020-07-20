@@ -271,6 +271,10 @@ class Yii2 extends Framework implements ActiveRecord, MultiSession, PartedModule
 
     protected function validateConfig()
     {
+        if (isset($_SERVER['Yii2ConfigFile']) && !isset($this->config['configFile'])) {
+            $this->config['configFile'] = $_SERVER['Yii2ConfigFile'];
+        }
+        
         parent::validateConfig();
 
         $pathToConfig = codecept_absolute_path($this->config['configFile']);
